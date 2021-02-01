@@ -1,3 +1,7 @@
+const { format } = require('date-fns');
+
+
+
 const renderAttributes = (attributes) => {
   const output = [];
   for (attribute in attributes) {
@@ -9,6 +13,7 @@ const renderAttributes = (attributes) => {
 
 
 module.exports = () => ({ registerTemplateHelper }) => {
+
 
   registerTemplateHelper('activeLink', (metadata, href, title, attributes = {}, wrapper) => {
     // if this link goes to the current page add the class "active"
@@ -38,5 +43,9 @@ module.exports = () => ({ registerTemplateHelper }) => {
     }
     return output.join('');
   });
+
+
+  registerTemplateHelper('formatDate', (metadata, date, dateFormat, options = {}) => format(date, dateFormat, options));
+
 
 }
