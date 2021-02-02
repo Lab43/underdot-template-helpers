@@ -1,4 +1,7 @@
-const { format } = require('date-fns');
+const { format } = require('date-fns')
+    , fs = require('fs')
+    , p = require('path')
+;
 
 
 
@@ -12,7 +15,7 @@ const renderAttributes = (attributes) => {
 
 
 
-module.exports = () => ({ registerTemplateHelper }) => {
+module.exports = () => ({ registerTemplateHelper, source}) => {
 
 
   registerTemplateHelper('activeLink', (metadata, href, title, attributes = {}, wrapper) => {
@@ -46,6 +49,9 @@ module.exports = () => ({ registerTemplateHelper }) => {
 
 
   registerTemplateHelper('formatDate', (metadata, date, dateFormat, options = {}) => format(date, dateFormat, options));
+
+
+  registerTemplateHelper('fileExists', (metadata, filename) => fs.existsSync(p.join(source, filename)));
 
 
 }
